@@ -1,25 +1,51 @@
 # JEP of the Day
 
-A tiny static web app that shows one JEP per day, with a summary and a link to read the full text.
+One [JEP](https://openjdk.org/jeps/0) (JDK Enhancement Proposal) per day, with a short summary and a link to read the full text.
 
-## Run it
+**Live app: <https://dailyjep-production.up.railway.app/>**
+
+The JEP of the day is picked from the list at the bottom of this file, by date. Everyone sees the same JEP on the same day.
+
+## Contributing
+
+Contributions are welcome. The easiest way to help is to **add a JEP** to the list.
+
+1. Fork [FranckAymar/DailyJEP](https://github.com/FranckAymar/DailyJEP) and create a branch.
+2. Add a section at the **end of this file**, in exactly this form:
+
+   ```
+   ### 444 | Virtual Threads
+   One-paragraph summary.
+   ```
+
+   - The number and title must match the JEP on [openjdk.org/jeps](https://openjdk.org/jeps/0).
+   - Use the JEP's own **Summary** section, or a short faithful paraphrase of it. Keep it to one paragraph.
+   - Don't add a JEP that is already in the list.
+   - The link `https://openjdk.org/jeps/<number>` is generated automatically.
+3. Check it locally (see below), then open a pull request.
+
+Bug fixes and improvements to the page or server are welcome too. Please keep the project dependency-free (plain HTML, CSS and Node) unless there is a good reason. For bigger changes, open an issue first.
+
+> Note: the page parses this file, so don't start a line with `### <number> |` anywhere except for a real JEP entry (examples in code blocks are ignored).
+
+## Run it locally
+
+You need [Node.js](https://nodejs.org/) 16 or later. There is nothing to install.
 
 ```
 npm start
 ```
 
-Then open <http://localhost:3000> (set `PORT` to change it, e.g. `PORT=8080 npm start`). The page reads this README with `fetch`, so it must be served by the Node server, not opened as a file.
+Then open <http://localhost:3000>. Set `PORT` to change it, e.g. `PORT=8080 npm start`. The server reads this file on every request, so edits show up on refresh.
 
-## Add a JEP
-
-Add a section at the bottom of the list below, in exactly this form:
+## Project structure
 
 ```
-### 444 | Virtual Threads
-One-paragraph summary.
+public/index.html   the page
+public/style.css    its styles
+server.js           tiny Node server (no dependencies)
+README.md           documentation and the JEP list
 ```
-
-The link `https://openjdk.org/jeps/<number>` is generated automatically. The JEP of the day is picked from the list by date, so adding JEPs changes which one shows up on which day.
 
 ## JEPs
 

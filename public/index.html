@@ -4,20 +4,41 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>JEP of the Day</title>
+  <script>
+    // Apply the saved theme (or the system one) before first paint to avoid a flash.
+    (function () {
+      var theme;
+      try { theme = localStorage.getItem("theme"); } catch (e) {}
+      if (!theme) theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <button class="theme-toggle" id="theme-toggle" type="button"></button>
   <main>
     <p class="date" id="date"></p>
     <h1><span class="num" id="num"></span> <span id="title">Loading…</span></h1>
     <p id="summary"></p>
     <a class="btn" id="link" href="#" hidden>Read the full JEP →</a>
-    <p class="hint">Add more JEPs in <code>README.md</code>.</p>
+    <p class="hint">Add more JEPs in <a href="https://github.com/FranckAymar/DailyJEP#contributing"><code>README.md</code> on GitHub</a>.</p>
   </main>
 
   <script>
     // Reads the "### <number> | <title>" sections from README.md and shows one per day.
     const $ = id => document.getElementById(id);
+
+    const root = document.documentElement;
+    const toggle = $("theme-toggle");
+    const label = () => (toggle.textContent = root.dataset.theme === "dark" ? "☀ White" : "☾ Black");
+    label();
+    toggle.addEventListener("click", () => {
+      const next = root.dataset.theme === "dark" ? "light" : "dark";
+      root.dataset.theme = next;
+      try { localStorage.setItem("theme", next); } catch (e) {}
+      label();
+    });
 
     function parse(md) {
       md = md.replace(/^```[\s\S]*?^```/gm, ""); // ignore code blocks (the README's own examples)
