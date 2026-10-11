@@ -4,10 +4,10 @@ const path = require("path");
 
 const PORT = process.env.PORT || 3000;
 const FILES = {
-  "/": ["index.html", "text/html; charset=utf-8"],
-  "/index.html": ["index.html", "text/html; charset=utf-8"],
-  "/style.css": ["style.css", "text/css; charset=utf-8"],
-  "/README.md": ["README.md", "text/markdown; charset=utf-8"],
+  "/": ["public/index.html", "text/html; charset=utf-8"],
+  "/index.html": ["public/index.html", "text/html; charset=utf-8"],
+  "/style.css": ["public/style.css", "text/css; charset=utf-8"],
+  "/README.md": ["README.md", "text/markdown; charset=utf-8"], // the JEP list
 };
 
 http
