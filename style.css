@@ -1,0 +1,10 @@
+:root { color-scheme: light dark; --accent: #e76f00; }
+body { font: 18px/1.6 system-ui, sans-serif; margin: 0; }
+main { max-width: 40rem; margin: 4rem auto; padding: 0 1rem; }
+.date { opacity: .6; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; margin: 0; }
+h1 { margin: .2rem 0 1rem; line-height: 1.2; }
+.num { color: var(--accent); }
+.btn { display: inline-block; margin-top: 1rem; padding: .6rem 1.1rem; border-radius: .5rem;
+       background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; }
+.btn:hover { filter: brightness(1.1); }
+.hint { margin-top: 3rem; opacity: .6; font-size: .85rem; }

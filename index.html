@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JEP of the Day</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <p class="date" id="date"></p>
+    <h1><span class="num" id="num"></span> <span id="title">Loading…</span></h1>
+    <p id="summary"></p>
+    <a class="btn" id="link" href="#" hidden>Read the full JEP →</a>
+    <p class="hint">Add more JEPs in <code>README.md</code>.</p>
+  </main>
+
+  <script>
+    // Reads the "### <number> | <title>" sections from README.md and shows one per day.
+    const $ = id => document.getElementById(id);
+
+    function parse(md) {
+      md = md.replace(/^```[\s\S]*?^```/gm, ""); // ignore code blocks (the README's own examples)
+      return [...md.matchAll(/^###\s+(\d+)\s*\|\s*(.+)\n([\s\S]*?)(?=^#{1,3}\s|(?![\s\S]))/gm)]
+        .map(m => ({ number: m[1], title: m[2].trim(), summary: m[3].trim() }));
+    }
+
+    fetch("README.md")
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+      .then(md => {
+        const jeps = parse(md);
+        if (!jeps.length) throw new Error("no JEP found in README.md");
+        const today = new Date();
+        const day = Math.floor(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) / 864e5);
+        const jep = jeps[day % jeps.length];
+        $("date").textContent = today.toLocaleDateString(undefined, { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+        $("num").textContent = "JEP " + jep.number;
+        $("title").textContent = jep.title;
+        $("summary").textContent = jep.summary;
+        $("link").href = "https://openjdk.org/jeps/" + jep.number;
+        $("link").hidden = false;
+        document.title = "JEP " + jep.number + " · JEP of the Day";
+      })
+      .catch(e => { $("title").textContent = "Could not load README.md (" + e.message + ")"; });
+  </script>
+</body>
+</html>

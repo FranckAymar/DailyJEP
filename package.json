@@ -1,0 +1,13 @@
+{
+  "name": "jep-day",
+  "version": "1.0.0",
+  "description": "One JEP per day, with a summary and a link to read more.",
+  "main": "server.js",
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "MIT"
+}
