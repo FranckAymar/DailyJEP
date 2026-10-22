@@ -30,7 +30,7 @@ Bug fixes and improvements to the page or server are welcome too. Please keep th
 
 ## Run it locally
 
-You need [Node.js](https://nodejs.org/) 16 or later. There is nothing to install.
+You need [Node.js](https://nodejs.org/) 26.12.1 or later. There is nothing to install.
 
 ```
 npm start
